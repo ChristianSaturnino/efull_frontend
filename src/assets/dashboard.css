@@ -9,6 +9,10 @@
     flex-direction: column;
 }
 
+.container-sm {
+  width: 100% !important;
+}
+
 .brand {
     width: 100%;
     height: 100px;

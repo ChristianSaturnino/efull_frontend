@@ -4,6 +4,7 @@
 </script>
 
 <template>
+    
     <Navbar/>
     <div class="container-sm">
         <div class="text-box">
