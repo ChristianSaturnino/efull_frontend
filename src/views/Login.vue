@@ -1,56 +1,68 @@
-
-
 <template>
-    <div style="margin-top: 2vh;" class="container">
-      <div class="screen">
-        <div class="screen__content">
-          <form class="login" @submit.prevent="submitForm">
-            <img class="logo" src="https://res.cloudinary.com/daox93pja/image/upload/v1715122906/e-full/rxdmtvmlczmg69wkeovx.png" alt="">
-            <div class="login__field">
-              <i class="login__icon fas fa-user"></i>
-              <input v-model="username" type="text" class="login__input" placeholder="Usuário / Email">
-            </div>
-            <div class="login__field">
-              <i class="login__icon fas fa-lock"></i>
-              <input v-model="password" type="password" class="login__input" placeholder="Senha">
-            </div>
-            <button type="submit" class="btn-login">Entrar</button>  
-            <div class="links">
-              <router-link class="router-link" to="/register"><p>Ainda não possui um cadastro?</p></router-link>
-              <router-link class="router-link" to="/redefinir-senha"><p>Esqueci minha senha</p></router-link>
-            </div>
-          </form>
-          <div v-if="responseMessage" class="response-message">{{ responseMessage }}</div>
-        </div>  
-      </div>
+  <div style="margin-top: 2vh;" class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login" @submit.prevent="submitForm">
+          <img class="logo" src="https://res.cloudinary.com/daox93pja/image/upload/v1715122906/e-full/rxdmtvmlczmg69wkeovx.png" alt="">
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input v-model="username" type="text" class="login__input" placeholder="Usuário / Email">
+          </div>
+          <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input v-model="password" type="password" class="login__input" placeholder="Senha">
+          </div>
+          <button type="submit" class="btn-login">Entrar</button>  
+          <div class="links">
+            <router-link class="router-link" to="/register"><p>Ainda não possui um cadastro?</p></router-link>
+            <router-link class="router-link" to="/redefinir-senha"><p>Esqueci minha senha</p></router-link>
+          </div>
+        </form>
+        <div v-if="responseMessage" class="response-message">{{ responseMessage }}</div>
+      </div>  
     </div>
-  </template>
-  
-  <script setup>
-  import axios from 'axios';
-  import { ref } from 'vue';
-  
-  const username = ref('');
-  const password = ref('');
-  const responseMessage = ref('');
-  
-  const submitForm = async () => {
-    try {
-      const response = await axios.post('URLAPIAQUI', {
-        username: username.value,
-        password: password.value,
-      });
-      
+  </div>
+</template>
 
-      console.log(response.data);
-      responseMessage.value = "Login bem-sucedido!";
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      responseMessage.value = "Erro ao fazer login.";
+<script setup>
+import axios from 'axios';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const username = ref('');
+const password = ref('');
+const responseMessage = ref('');
+const router = useRouter();
+
+const fetchUsers = async () => {
+  try {
+    const response = await axios.get('https://localhost:7044/api/Usuarios');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    responseMessage.value = 'Erro ao buscar usuários.';
+  }
+};
+
+const submitForm = async () => {
+  try {
+    const users = await fetchUsers();
+    
+    
+    const user = users.find(u => (u.username === username.value || u.email === username.value) && u.password === password.value);
+    
+    if (user) {
+      
+      router.push('/dash');
+    } else {
+      responseMessage.value = "Usuário ou senha incorretos.";
     }
-  };
-  </script>
-  
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+    responseMessage.value = "Erro ao fazer login.";
+  }
+};
+</script>
   <style scoped>
    @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
