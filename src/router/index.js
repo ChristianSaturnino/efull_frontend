@@ -6,7 +6,11 @@ import Entregas from '@/views/Entregas.vue';
 import Registro from '@/views/Registro.vue';
 import Redefinir from '@/views/Redefinir-senha.vue';
 import About from '@/views/About.vue';
+<<<<<<< HEAD
 
+=======
+import HereApiComponent from '@/components/HereApiComponent.vue'; // Adicione esta linha
+>>>>>>> 86640dea86a296be0e60a9932c49aaef92bc140e
 
 const routes = [
   {
@@ -45,8 +49,14 @@ const routes = [
     component: Entregas
   },
   {
+<<<<<<< HEAD
     path: '/here-api',
     name: 'HereApi',
+=======
+    path: '/here-api', // Adicione esta rota
+    name: 'HereApi',
+    component: HereApiComponent
+>>>>>>> 86640dea86a296be0e60a9932c49aaef92bc140e
   }
 ];
 
