@@ -1,8 +1,10 @@
 <template>
-    <div class="container-22">
-        <div class="menu">
+  <div class="app">
+  <transition name="fade">
+    <div v-if="isMounted" class="container-caue">
+        <div class="menu-caue">
             <div class="brand">
-                <img src="../assets/e-logo.png" alt="">
+                <img src="https://res.cloudinary.com/daox93pja/image/upload/v1715122906/e-full/rxdmtvmlczmg69wkeovx.png" alt="">
                 <p>Efull Dashboard</p>
             </div>
             <div class="line"></div>
@@ -21,27 +23,9 @@
                 </div>
                 <div class="menu-item-2">
                     <div class="icon-2">
-                        <i class="bi bi-people-fill"></i>
-                    </div>
-                    <p>Equipe</p>
-                </div>
-                <div class="menu-item-2">
-                    <div class="icon-2">
-                        <i class="bi bi-bar-chart-fill"></i>
-                    </div>
-                    <p>Desempenho</p>
-                </div>
-                <div class="menu-item-2">
-                    <div class="icon-2">
-                        <i class="bi bi-file-earmark-fill"></i>
-                    </div>
-                    <p>Relatórios</p>
-                </div>
-                <div class="menu-item-2">
-                    <div class="icon-2">
                         <i class="bi bi-geo-alt-fill"></i>
                     </div>
-                    <p>Rastreamento</p>
+                    <p><a href="mapa">Rastreamento</a></p>
                 </div>
             </div>
         </div>
@@ -52,7 +36,7 @@
                     <div class="q-pages">
                         <p class="pag">Páginas</p>
                         <p>/</p>
-                        <p>Dashoboard</p>
+                        <p>Dashboard</p>
                     </div>
                     <h1>Dashboard</h1>
                 </div>
@@ -134,11 +118,6 @@
                             <div class="info-icon-2"><i class="bi bi-share"></i></div>
                         </div>
                         <h1>Resumo da Logística</h1>
-                        <div class="marquee-container">
-                            <div class="marquee">
-                                <p class="text">Nota total da empresa em relação aos dados:<b class="green">8.5 &nbsp; </b>Nota de feedback do cliente:<b class="green">6.8 &nbsp;</b></p>
-                            </div>
-                          </div>
                         <div>
                             <h3>Total de Clientes: <b>223</b></h3>
                           </div>
@@ -251,17 +230,321 @@
             </div>
         </div>
     </div>
+  </transition>
+</div>
 </template>
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      isMounted: false
+    };
+  },
+  mounted() {
+    this.isMounted = true;
+  }
+}
+</script>
+
 
 <style scoped>
 
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-
-.container-22 {
-  display:flex;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 500ms ease;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 
-.menu {
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+
+body {
+  background: #f1f1f1;
+}
+
+* {
+  font-size: 2.1vh;
+}
+
+.carousel-inner img {
+  border-radius: 32px;
+}
+
+.carousel-inner {
+  width: auto;
+  height: auto;
+  border-radius: 32px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#carouselExampleSlidesOnly {
+  margin-bottom: 10%;
+}
+
+
+
+.btn-login {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background-image: linear-gradient( to right, #FF0000, #FFC000);
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 4px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 500ms;
+}
+
+.btn-login:hover {
+    opacity: 0.5;
+}
+
+.btn:hover  {
+    color: #b40000;
+}
+
+.title-gradient {
+    background-image: linear-gradient(to right, #FF0000, #FF8000, #FFC000);
+    background-clip: text;  
+    -webkit-text-fill-color: transparent; 
+    color: transparent;    
+}
+.text-box {
+    margin: 10% 0 7% 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-box h1 {
+    font-size: 3.3em; 
+    font-weight: 800;
+}
+
+.card {
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 64px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+}
+
+.bg-1 {
+
+    background-color: #212529;
+}
+
+  .container-sm {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .card img {
+    max-width: 100px;
+  }
+
+
+
+.aviso {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10%;
+    width: 100%;
+    padding: 15px;
+    border-radius: 32px;
+    gap: 20px;
+}
+
+.aviso h7 {
+    max-width: 800px;
+}
+
+.aviso i {
+    font-size: 3rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10%;
+    display: flex;
+    padding: 10% 0% 5% 0%;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e5e5e5;
+  }
+  
+  .footer > * {
+    flex:  1 100%;
+  }
+  
+  .footer__addr {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2em;
+  }
+
+
+  .footer img {
+    max-width: 90px;
+    margin-bottom: 30px;
+  }
+  
+  .footer__addr h2 {
+    margin-top: 1.3em;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  
+  .nav__title {
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  .footer address {
+    font-style: normal;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .footer li {
+    line-height: 2em;
+  }
+  
+  .footer a {
+    text-decoration: none;
+  }
+  
+  .footer__nav {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footer__nav > * {
+    flex: 1 50%;
+    margin-right: 1.25em;
+  }
+  
+  .nav__ul a {
+    color: #212529;
+  }
+  
+  .nav__ul--extra {
+    column-count: 2;
+    column-gap: 1.25em;
+  }
+  
+  .copy {
+    gap: 30px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+    
+ 
+  
+  .heart {
+    color: #2f2f2f;
+  }
+  
+  @media screen and (min-width: 24.375em) {
+    .legal .legal__links {
+      margin-left: auto;
+    }
+  }
+  
+  @media screen and (min-width: 40.375em) {
+    .footer__nav > * {
+      flex: 1;
+    }
+    
+    .nav__item--extra {
+      flex-grow: 2;
+    }
+    
+    .footer__addr {
+      flex: 1 0px;
+    }
+    
+    .footer__nav {
+      flex: 2 0px;
+    }
+  }
+
+  .branding {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+  }
+  
+  .branding img {
+    max-width: 500px;
+  }
+
+
+
+  .text-box a {
+    color: #212529;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 1s;
+  }
+
+.text-box a:hover {
+  color: #929394;
+  text-decoration: underline;
+}
+
+  .branding  h1 {
+    margin-left: 10px;
+    font-size: 52px;
+    font-weight: 800;
+    max-width: 600px;
+  }
+  
+  p {
+    margin-bottom: 0;
+  }
+
+  .branding p {
+    margin-left: 10px;
+    max-width:450px;
+  }
+
+
+/* Dash  */
+
+
+.menu-caue {
+  margin-top: 30px;
     width: 20%;
     height: 100vh;
     position: relative;
@@ -269,8 +552,6 @@
     align-items: center;
     flex-direction: column;
 }
-
-
 
 .brand {
     width: 100%;
@@ -303,7 +584,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 }
 
 .menu-item {
@@ -356,10 +637,10 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.container {
+.container-caue {
     display: flex;
     position: relative;
-    width: 100%;
+    width: 100% !important;
 }
 
 .dashboard {
@@ -369,7 +650,7 @@
     display: flex;
     flex-direction: column;
     padding: 50px;
-    gap: 40px;
+    gap: 20px;
 }
 
 .q-pages {
@@ -711,5 +992,4 @@ svg {
     background-color: #f1f1f1;
     border-radius: 0px !important;
   }
-
 </style>

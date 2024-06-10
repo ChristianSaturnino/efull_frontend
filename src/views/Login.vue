@@ -1,38 +1,180 @@
 <template>
-<div class="container-sm">
-        <h1>Políticas da Empresa - eFull</h1>
-        <p>Bem-vindo à eFull, onde fornecemos soluções inovadoras em logística para impulsionar o crescimento e eficiência de sua empresa. A seguir, estão as políticas que regem nosso uso de API e dados de logística, bem
-            como as diretrizes para o uso responsável de nossa plataforma e aplicativo de mapa para motoristas.</p>
+  <div style="margin-top: 2vh;" class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login" @submit.prevent="submitForm">
+          <img class="logo" src="https://res.cloudinary.com/daox93pja/image/upload/v1715122906/e-full/rxdmtvmlczmg69wkeovx.png" alt="">
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input v-model="username" type="text" class="login__input" placeholder="Usuário / Email">
+          </div>
+          <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input v-model="password" type="password" class="login__input" placeholder="Senha">
+          </div>
+          <button @click="submitForm" class="btn-login" :disabled="loading">Entrar</button>
+          <div v-if="loading" class="loader-login"></div>
 
-        <h2>Uso de API e Dados de Logística</h2>
-        <ol>
-            <li><strong>Acesso e Segurança:</strong> O acesso às APIs e dados de logística é estritamente controlado e
-                limitado a funcionários autorizados da eFull. Utilizamos medidas de segurança avançadas para proteger a
-                integridade e confidencialidade dos dados.</li>
-            <li><strong>Utilização Responsável:</strong> Os dados obtidos das APIs de logística são usados
-                exclusivamente para melhorar nossos serviços e desenvolver funcionalidades em nossa plataforma e aplicativo. Não compartilhamos esses dados com terceiros sem consentimento explícito.</li>
-            <li><strong>Compliance:</strong> Comprometemo-nos a cumprir todas as leis e regulamentações aplicáveis
-                relacionadas ao uso de APIs e dados de logística. Isso inclui o respeito às políticas de privacidade e segurança de dados de nossos parceiros.</li>
-        </ol>
-
-        <h2>Diretrizes de Uso da Plataforma e Aplicativo de Mapa</h2>
-        <ol>
-            <li><strong>Registro e Autenticação:</strong> Todos os usuários da plataforma e do aplicativo de mapa devem
-                passar por um processo de registro e autenticação para acessar os serviços. As credenciais de acesso são
-                pessoais e não devem ser compartilhadas com terceiros.</li>
-            <li><strong>Uso Aceitável:</strong> Os usuários concordam em utilizar a plataforma e o aplicativo de mapa
-                apenas para fins legítimos e autorizados. Qualquer uso indevido, incluindo tentativas de acesso não autorizado, será investigado e pode resultar em medidas disciplinares.</li>
-            <li><strong>Privacidade e Proteção de Dados dos Motoristas:</strong> Respeitamos a privacidade dos
-                motoristas e nos comprometemos a proteger suas informações pessoais. Os dados dos motoristas coletados
-                pelo aplicativo de mapa são utilizados exclusivamente para otimizar suas rotas e proporcionar uma experiência de corrida mais eficiente.</li>
-        </ol>
-
-        <h2>Contato</h2>
-        <p>Se você tiver alguma dúvida ou preocupação sobre nossas políticas, entre em contato conosco através dos
-            seguintes meios:</p>
-        <ul>
-            <li>Email: <a href="mailto:contato@efull.com">contato@efull.com</a></li>
-            <li>Telefone: +55 12 3456-7890</li>
-        </ul>
-</div>
+          <div class="links">
+            <router-link class="router-link" to="/register"><p>Ainda não possui um cadastro?</p></router-link>
+            <router-link class="router-link" to="/redefinir-senha"><p>Esqueci minha senha</p></router-link>
+            <div v-if="responseMessage" class="response-message">{{ responseMessage }}</div>
+          </div>
+        </form>
+      </div>  
+    </div>
+  </div>
 </template>
+
+<script setup>
+
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+
+const username = ref('');
+const password = ref('');
+const responseMessage = ref('');
+const loading = ref(false);
+const router = useRouter();
+
+const fetchUsers = async () => {
+  try {
+    const response = await axios.get('https://localhost:7044/api/Usuarios');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    responseMessage.value = 'Erro ao buscar usuários.';
+  }
+};
+
+const submitForm = async () => {
+  loading.value = true; // Mostra o loader
+  responseMessage.value = ''; // Limpa a mensagem de resposta anterior
+
+  try {
+    const users = await fetchUsers();
+    const user = users.find(u => (u.username === username.value || u.email === username.value) && u.password === password.value);
+    
+    if (user) {
+      setTimeout(() => {
+        router.push('/dash');
+      }, 3000); // Espera 3 segundos antes de redirecionar
+    } else {
+      setTimeout(() => {
+        loading.value = false; // Esconde o loader
+        responseMessage.value = "Usuário ou senha incorretos.";
+      }, 3000); // Espera 3 segundos antes de mostrar a mensagem de erro
+    }
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+    setTimeout(() => {
+      loading.value = false; // Esconde o loader
+      responseMessage.value = "Erro ao fazer login.";
+    }, 3000); // Espera 3 segundos antes de mostrar a mensagem de erro
+  }
+};
+
+</script>
+
+  <style scoped>
+   @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+   .loader-login {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: 
+      radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+      conic-gradient(#0000 30%,#ffa516);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+    animation: l13 1s infinite linear;
+  }
+  
+  @keyframes l13{ 
+    100%{transform: rotate(1turn)}
+  }
+.links {
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   font-weight: 300;
+   font-size: 14px;
+}
+
+.router-link {
+   text-decoration: none !important;
+   color: rgb(70, 70, 70);
+   transition: 500ms;
+}
+
+.router-link:hover{
+   opacity: 0.5;
+}
+.logo {
+   max-width: 70px;
+}
+
+.container {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;    
+}
+
+.screen {		
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 500px;
+   width: 360px;	
+   border-radius: 32px;
+}
+
+.login {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 320px;
+   padding: 30px; 
+   gap: 50px;
+}
+
+
+
+.login__input {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border: none;
+   border-bottom: 2px solid #dddddd;
+   background: none;
+   padding: 10px;
+   font-weight: 700;
+   width: 100%;
+   transition: .2s;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+   outline: none;
+   border-bottom-color: #ff7300;
+}
+
+.line {
+   position: absolute;
+   bottom: 80px;
+   background: #000000;
+   width: 1000%;
+   display: flex;
+   height: 1px;
+   transform: scale(0.1);
+}
+
+  </style>
+  

@@ -4,7 +4,6 @@
 </script>
 
 <template>
-    
     <Navbar/>
     <div class="container-sm">
         <div class="text-box">
@@ -16,18 +15,17 @@
           <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="../assets/banner.png" class="d-block w-100" alt="...">
+                <img src="https://res.cloudinary.com/daox93pja/image/upload/v1715122665/e-full/cmeiooajxakyjtpwuyzt.png" class="d-block w-100" alt="...">
               </div>
             </div>
           </div>
           
       
             <div class="branding">
-              <img src="../assets/notebook.png" alt="monitor">
+              <img src="https://res.cloudinary.com/daox93pja/image/upload/v1715123132/e-full/ifvokw2hwaxyofhwzd9a.png" alt="monitor">
               <div class="b-box">
                 <h1>A dashboard que inova a logística </h1>
                 <p>Use as estatísticas ao seu favor, Cresça junto com elas. A dashboard logística inovadora aproveita dados para insights valiosos. Com análises precisas, identifica padrões, otimiza rotas e reduz custos.</p>
-                <router-link class="btn-login" aria-current="page" to="/dash">Entrar</router-link>
               </div>
             </div>
             <div class="aviso">
