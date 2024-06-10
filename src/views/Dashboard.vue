@@ -40,7 +40,7 @@
                     <div class="icon-2">
                         <i class="bi bi-geo-alt-fill"></i>
                     </div>
-                    <p><a href="rastreamento.html">Rastreamento</a></p>
+                    <p><a href="mapa.html">Rastreamento</a></p>
                 </div>
             </div>
         </div>
