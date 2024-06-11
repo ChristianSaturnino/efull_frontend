@@ -168,7 +168,7 @@ RoutingAB.prototype.createSearchBox = function(type) {
             key: 'rMMF1AG3qsB7UVgK5vMNbnJIT9pKTjoP'
         },
         labels: {
-            placeholder: 'Query e.g. Washington'
+            placeholder: 'Inserir endereço'
         }
     });
     document.getElementById(type + 'SearchBox').appendChild(searchBox.getSearchBoxHTML());

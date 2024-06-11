@@ -12,6 +12,12 @@
 
   <link rel="stylesheet" href="/style.css">
   <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: Raleway;
+}
           
           #foldable {
               font-size: 20px;
@@ -21,6 +27,8 @@
           #form {
               margin-top: 10px;
           }
+
+
           .icon {
               background-size: cover;
               height: 30px;
@@ -80,6 +88,7 @@
           }
 
           .btn-login {
+            text-decoration: none;
     width: 100px;
     display: flex;
     align-items: center;
@@ -112,7 +121,6 @@
             <p><strong>Destinatário:</strong> <span id="destinatario"></span></p>
             <p><strong>Distância:</strong> <span id="distancia"></span> km</p>
             <p><strong>Status:</strong> <span id="status"></span></p>
-            <a class="btn-login" href="/Entregas"><b>Voltar</b></a>
             <p class="title">Visualize aqui a sua rota</p>
             <form id=form>
                 <div id='startSearchBox' class='searchbox-container'>
@@ -122,6 +130,7 @@
                     <div class='tt-icon tt-icon-size icon-spacing-right -finish'></div>
                 </div>
             </form>
+            <a class="btn-login" href="/Entregas"><b>Voltar</b></a>
             
         </div>
     </div>

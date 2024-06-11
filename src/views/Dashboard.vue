@@ -40,7 +40,7 @@
                     </div>
                     <h1>Dashboard</h1>
                 </div>
-                <h1>VJR Logística</h1>
+        
                 <p id="data"></p>
                 <div class="nav">
                     <nav>

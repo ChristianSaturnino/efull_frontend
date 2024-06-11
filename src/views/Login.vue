@@ -59,19 +59,19 @@ const submitForm = async () => {
     if (user) {
       setTimeout(() => {
         router.push('/dash');
-      }, 3000); // Espera 3 segundos antes de redirecionar
+      }, 1000); // Espera 3 segundos antes de redirecionar
     } else {
       setTimeout(() => {
         loading.value = false; // Esconde o loader
         responseMessage.value = "Usuário ou senha incorretos.";
-      }, 3000); // Espera 3 segundos antes de mostrar a mensagem de erro
+      }, 1000); // Espera 3 segundos antes de mostrar a mensagem de erro
     }
   } catch (error) {
     console.error("Erro ao fazer login:", error);
     setTimeout(() => {
       loading.value = false; // Esconde o loader
       responseMessage.value = "Erro ao fazer login.";
-    }, 3000); // Espera 3 segundos antes de mostrar a mensagem de erro
+    }, 1000); // Espera 3 segundos antes de mostrar a mensagem de erro
   }
 };
 
@@ -88,7 +88,7 @@ const submitForm = async () => {
       radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
       conic-gradient(#0000 30%,#ffa516);
     -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
-    animation: l13 1s infinite linear;
+    animation: l13 500ms infinite linear;
   }
   
   @keyframes l13{ 

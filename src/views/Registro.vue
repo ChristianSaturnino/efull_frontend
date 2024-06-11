@@ -15,7 +15,7 @@
             <div class="login__field">
               <input v-model="password" type="password" class="login__input" placeholder="Senha">
             </div>
-            <button type="submit" class="btn-login">Registrar</button>
+            <button onclick="irParaLogin()" type="submit" class="btn-login">Registrar</button>
           </form>
           <div v-if="responseMessage" class="response-message">{{ responseMessage }}</div>
         </div>
@@ -56,12 +56,17 @@ const submitForm = async () => {
     });
     
     responseMessage.value = "Registro bem-sucedido!";
+    setTimeout(irParaLogin, 3000);
     fetchUsers();
   } catch (error) {
     console.error('Erro ao registrar:', error);
     responseMessage.value = 'Erro ao registrar.';
   }
 };
+
+function irParaLogin() {
+  location.href = "/login"
+}
 
 onMounted(() => {
   fetchUsers();
